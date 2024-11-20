@@ -49,6 +49,8 @@ print(f"John's email is: {email}. type is {type(email)}") # Type if tuple
 # d.clear()
 # del d
 
+# Length of dictionary
+print(len(dict1))
 
 
 

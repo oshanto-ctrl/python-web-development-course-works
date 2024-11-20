@@ -36,3 +36,6 @@ tc = (1, 2, 3, 4, 5, 6, 6)
 print(f"{a}, {b}, {c}")
 
 
+# Length of tuple
+print(len(tc))
+

@@ -36,8 +36,7 @@ u4 = u1.intersection(u2)
 print(u4)
 # difference?
 
-
-
-
+# len of set
+print(len(s))
 
 
