@@ -38,11 +38,29 @@ print("abCDEFgh".casefold())
 
 # 3: center : Pads the input string to the center with the specified character
 
-# 4: count
+# 4: count : returns number of times value 'x' appears in the string
+txt = "I like apples. green apple, blue apple. apple is good."
+count_apples = txt.count("apple")
+print("count function: ", count_apples)
+
 # 5: encode
+
 # 6: endswith
-# 7: expandtabs
-# 8: find
+txt = "Hello, welcome to my world!"
+print(f"Is {txt} ends with ! mark: {txt.endswith('!')}")
+# check if text  ends with 'my world' in specific position
+print(f"Is phrase 'my world' in range of 15 and 26 of {txt}? ans: {txt.endswith("my world!", 15, 26)}")
+
+# 7: expandtabs : Set the tab size to 2 whitespaces
+print(f"{txt.expandtabs(2)}")
+
+# 8: find : finds the first occurence of the specified value
+# if value not found, returns -1 [Kind of simillar to index()]
+txt = "you you me you me"
+you = txt.find("you") # 0
+me = txt.find("me") # 8
+print(f"'you' in index {you}\n'me' at index {me}")
+
 # 9: format
 # 10: format_map
 # 11: index
