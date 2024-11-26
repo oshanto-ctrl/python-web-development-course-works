@@ -63,45 +63,85 @@ print(f"'you' in index {you}\n'me' at index {me}")
 
 # 9: format
 # 10: format_map
-# 11: index
-# 12: isalnum
-# 13: isalpha
-# 14: isascii
+# 11: index : same as find() but raises an exception
+str1 = "Hello. welcome to pythong course."
+str2 = "to"
+resulting_index = str1.index(str2)
+print("The index where substring str2 found: ", resulting_index)
+
+# 12: isalnum : returns true if string has atleast 1 char and all char are alphanumeric, false otherwise.
+# Other characters such as '!', '.', '/', etc.. are not alphanumeric characters
+txt = "1JohnUpTheTree#"
+only_num = '123abc'
+print(f"Is {txt} alphanumeric? {txt.isalnum()}\nIs {only_num} alphanumeric? {only_num.isalnum()}")
+
+
+# 13: isalpha : check whether the string consist of alphabets. otherwise return false.
+txt = "Abcdefg"
+print(f"Is {txt} all alphabet? {txt.isalpha()}") # False: '' space character.
+
+
+
+# 14: isascii : Check whether all characters in a string is ASCII (Unicode 0-127)
+txt = "Hello"
+print(txt.isascii())
+
+
 # 15: isdecimal
+
+
 # 16: isdigit
+
+
 # 17: isidentifier
+
 # 18: islower
+
 # 19: isnumeric
+
 # 20: isprintable
+
 # 21: isspace
+
 # 22: istitle
-# 23: isupper
+# 23: isupper # check if the string is in uppercase.
 # 24: join
 # 25: ljust
-# 26: lower
+# 26: lower : lowercase conversion of string.
 # 27: lstrip
 # 28: maketrans
 # 29: partition
 # 30: removeprefix
 # 31: removesuffix
-# 32: replace
+# 32: replace : replace substring found in string.
 # 33: rfind
 # 34: rindex
 # 35: rjust
 # 36: rpartition
 # 37: rsplit
 # 38: rstrip
-# 39: split
+# 39: split : splits all the words in a string
+# sepearted by a separator. This separator can is a delimiter string,
+# can be comma, full-stop, space char or anyother char pattern.
+txt = "We Love Mangoes."
+print(f"Split with space char: ", txt.split())
+
 # 40: splitlines
 # 41: startswith
 # 42: strip
 # 43: swapcase
 # 44: title
+txt = "usergame is gaming."
+print(txt.title()) # Usergame Is Gaming.
 # 45: translate
 # 46: upper
+txt = "username"
+print(txt.upper()) # USERNAME
 # 47: zfill
 
 
 
 
-
+'''
+Valuable recourse from tutorialspoint: https://www.tutorialspoint.com/python/python_string_methods.htm
+'''
