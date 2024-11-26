@@ -109,15 +109,24 @@ def modulo(numbers):
         return numbers[0] % numbers[1]
     except ZeroDivisionError:
         print("Oo Oh! Unable to modulo by zero.")
+        return None
 
 # Calculator function
 def calculator():
     """
     This function is for user prompting and taking the user input
     to do operations.
-    last_result variable to store the result of last calculation.
+    User selects oepration then the get_numbers() function invokes.
+    User input numbers.
+    Numbers are sent to dedicated functions for calculation and then
+    the result returned.
+
+    Prompting user after each calculation if user wants to proceed
+    for another calculation or not. If 'yes' then that break statement
+    at inner while loop breaks the prompt and give chance to user for
+    doing another calculation. If 'no' then it quits the program.
     """
-    last_result = None
+    
 
     while True:
         # prompt user the display menu.
@@ -145,9 +154,9 @@ def calculator():
             numbers = get_numbers("Enter only two numbers to divide. (Space Seperated.):\t")
             # Send the numbers list to divide function and store the result.
             result = divide(numbers)
-        elif select == "5" or select.lower == "%":
+        elif select == "5" or select.lower() == "%":
             # Input numbers
-            numbers = input("Enter two numbers for modulus calculation. (Space Seperated.):\t")
+            numbers = get_numbers("Enter two numbers for modulus calculation. (Space Seperated.):\t")
             # Send the numbers list to modulo function and store the result.
             result = modulo(numbers)
         elif select == "6" or select.lower() == "exit":
@@ -158,9 +167,20 @@ def calculator():
             print("Oo Oh! Invalid Selection for operation. Please select a valid operation.")
         
         if result is not None:
-            print(f"Result: {result}")
-            continue # Giving another change to user for calculation after invalid input.
+            print(f"Result: {result}") # Printing the calulation result.
 
+            # Prompt user that if they want to perform another calculation.
+            while True:
+                user_input = input("Do you want to calculate more? (yes/no)").strip().lower()
+                if user_input == "yes":
+                    break # Continue to next iteration for another calculation.
+                elif user_input == "no":
+                    print("Exiting Calculator! Sorry to see you leave!")
+                    return # Exiting the calculation process
+                else:
+                    print("Oo Oh! Invalid prompt detected. Please enter 'yes' or 'no'")
+                    continue # Giving another chanche to user put yes or no.
+ 
 # Driver to run the calculator
 calculator()
 
