@@ -1,5 +1,5 @@
 """
-Calculator in python performing basi arithmetic operations
+Calculator in python performing basic arithmetic operations
 (Addition, Subtraction, Multiplication, Division, Modulo).
 
 User will input and program will perform calcuation and 
