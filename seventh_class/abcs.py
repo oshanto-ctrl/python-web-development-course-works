@@ -72,3 +72,7 @@ nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 res = filter(lambda n : n > 5, nums)
 print(list(res))
 
+# reduce, zip, min, max
+
+# class after next class.
+# QUIZZZZ and Problem Solving TASK!!!!

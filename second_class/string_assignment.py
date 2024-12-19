@@ -88,56 +88,142 @@ print(txt.isascii())
 
 
 # 15: isdecimal
-
+txt = "12345"
+print(f"Is {txt} decimal? {txt.isdecimal()}")
 
 # 16: isdigit
-
+txt = "12345"
+print(f"Is {txt} digit? {txt.isdigit()}")
 
 # 17: isidentifier
+txt = "variable1"
+print(f"Is {txt} a valid identifier? {txt.isidentifier()}")
 
 # 18: islower
+txt = "hello"
+print(f"Is {txt} all lowercase? {txt.islower()}")
 
 # 19: isnumeric
+txt = "12345"
+print(f"Is {txt} numeric? {txt.isnumeric()}")
 
 # 20: isprintable
+txt = "Hello, World!"
+print(f"Is {txt} printable? {txt.isprintable()}")
 
 # 21: isspace
+txt = "   "
+print(f"Is {txt} all whitespace? {txt.isspace()}")
 
 # 22: istitle
-# 23: isupper # check if the string is in uppercase.
+txt = "Hello World"
+print(f"Is {txt} title-cased? {txt.istitle()}")
+
+# 23: isupper
+txt = "HELLO"
+print(f"Is {txt} all uppercase? {txt.isupper()}")
+
 # 24: join
+my_list = ['a', 'b', 'c']
+print(f"Joined string: {'-'.join(my_list)}")
+
 # 25: ljust
-# 26: lower : lowercase conversion of string.
+txt = "Hello"
+print(f"Left justified: '{txt.ljust(10)}'")
+
+# 26: lower
+txt = "HELLO"
+print(f"Lowercase: {txt.lower()}")
+
 # 27: lstrip
+txt = "   Hello"
+print(f"Left stripped: '{txt.lstrip()}'")
+
 # 28: maketrans
+intab = "aeiou"
+outtab = "12345"
+trantab = str.maketrans(intab, outtab)
+txt = "this is string example....wow!!!"
+print(txt.translate(trantab))
+
 # 29: partition
+txt = "I could eat bananas all day"
+print(txt.partition("bananas"))
+
 # 30: removeprefix
+txt = "HelloWorld"
+print(txt.removeprefix("Hello"))
+
 # 31: removesuffix
-# 32: replace : replace substring found in string.
+txt = "HelloWorld"
+print(txt.removesuffix("World"))
+
+# 32: replace
+txt = "I like bananas"
+print(txt.replace("bananas", "apples"))
+
 # 33: rfind
+txt = "Hello, welcome to my world."
+print(txt.rfind("e"))
+
 # 34: rindex
+txt = "Hello, welcome to my world."
+print(txt.rindex("e"))
+
 # 35: rjust
+txt = "Hello"
+print(f"Right justified: '{txt.rjust(10)}'")
+
 # 36: rpartition
+txt = "I could eat bananas all day, bananas are my favorite fruit"
+print(txt.rpartition("bananas"))
+
 # 37: rsplit
+txt = "apple, banana, cherry"
+print(txt.rsplit(", "))
+
 # 38: rstrip
-# 39: split : splits all the words in a string
-# sepearted by a separator. This separator can is a delimiter string,
-# can be comma, full-stop, space char or anyother char pattern.
+txt = "Hello   "
+print(f"Right stripped: '{txt.rstrip()}'")
+
+# 39: split
 txt = "We Love Mangoes."
-print(f"Split with space char: ", txt.split())
+print(f"Split with space char: {txt.split()}")
 
 # 40: splitlines
+txt = "Thank you for the music\nWelcome to the jungle"
+print(txt.splitlines())
+
 # 41: startswith
+txt = "Hello, welcome to my world."
+print(txt.startswith("Hello"))
+
 # 42: strip
+txt = "   Hello   "
+print(f"Stripped: '{txt.strip()}'")
+
 # 43: swapcase
+txt = "Hello World"
+print(txt.swapcase())
+
 # 44: title
 txt = "usergame is gaming."
-print(txt.title()) # Usergame Is Gaming.
+print(txt.title())
+
 # 45: translate
+intab = "aeiou"
+outtab = "12345"
+trantab = str.maketrans(intab, outtab)
+txt = "this is string example....wow!!!"
+print(txt.translate(trantab))
+
 # 46: upper
 txt = "username"
-print(txt.upper()) # USERNAME
+print(txt.upper())
+
 # 47: zfill
+txt = "42"
+print(txt.zfill(5))
 
 
 
