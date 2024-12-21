@@ -24,4 +24,17 @@ try:
 except ValueError as e:
     print(f"Caught an error: {e}")
 
+name = "ziszas"
+
+# finally block still runs after the try-except block completes.
+try:
+    if 'g' in name:
+        print("TOP G.")
+    else:
+        raise ValueError("Computer says Bottom G.")
+except ValueError as e:
+    print(f"Caught an error: {e}")
+
+finally:
+    print("Finally block executed")
 
