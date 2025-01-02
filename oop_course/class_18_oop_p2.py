@@ -77,12 +77,46 @@ print("\n---- Accountant ----")
 acc1.display_employee_info() # Inherits and uses display_employee_info method from Employee class.
 
 
+# Multi level inhertance
+# A class that is derived from another derived class.
+"""
+Manager class is derived from Employee class.
+Manager's department is 'Engineering'
+Developer class is derived from Manager class.
+We can query the developer's department from the Manager class
+department. As, Engineering department developer will be under the
+Engineering manager.
+"""
+
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+    
+    def display_info(self):
+        print(f"Employee id: {self.emp_id}, Name: {self.name}")
+
+class Manager(Employee):
+
+    # Display Department Info
+    def display_department(self, dep_name):
+        print(f"Department: {dep_name}")
+
+class Developer(Manager):
+    
+    # Display Developer info on programming languages
+    def display_expertise(self, lang_name):
+        print(f"Expertise: {lang_name}")
 
 
 
+manager = Manager("Salman", 301)
+developer = Developer("Manaur", 204)
 
+manager.display_info()
+manager.display_department("Enginnering")
 
-
-
-
+developer.display_info()
+developer.display_department("Engineering") # Inherits from Manager class
+developer.display_expertise("Python")
 
