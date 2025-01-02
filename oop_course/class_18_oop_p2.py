@@ -1,4 +1,4 @@
-"""Inheritence"""
+"""Inheritence PART 1"""
 
 class SoftwareEngineer:
     """A class represents different type of software engieers."""
