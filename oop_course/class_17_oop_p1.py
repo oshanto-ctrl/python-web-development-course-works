@@ -17,7 +17,15 @@ OOP Contents
 14. Context Manager
 
 """
+# A student clss
+class Student:
+    """ A class student that stores student details."""
+    # Attributes
+    name = ''
 
-
+# Create an object/instance of the class
+student1 = Student()
+student1.name = "Tom" # Accessing the attribute of the class
+print(student1.name)    
 
 
