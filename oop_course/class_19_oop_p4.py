@@ -43,6 +43,20 @@ class Point:
         self.y = y
     
     def __add__(self, other):
+            # This magic method overloads the '+' operator for Point objects
+            
+            # Parameters:
+            # - self: The current Point instance (automatically passed)
+            # - other: Another Point instance that's being added
+            
+            # Example:
+            # p1 = Point(1, 2)
+            # p2 = Point(3, 4)
+            # p3 = p1 + p2  # Under the hood, this calls p1.__add__(p2)
+            
+            # Returns:
+            # - A new Point instance with summed coordinates 
+      
         x = self.x + other.x
         y = self.y + other.y
         return Point(x, y)
