@@ -46,9 +46,6 @@ def palindrome_checker(text):
     else:
         print("NO")
 
-
-
-
 text  = "A man, a plan, a canal, Panama"
 
 # Call palindrome checker with argument text
