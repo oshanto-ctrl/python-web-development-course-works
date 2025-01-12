@@ -113,5 +113,5 @@ print(f"Are there any elements even? {str(any(even_list))}")
 print(f"Are there any elements odd? {str(any(odd_list))}")
 
 
-
+# https://stackabuse.com/any-and-all-in-python-with-examples/
 
