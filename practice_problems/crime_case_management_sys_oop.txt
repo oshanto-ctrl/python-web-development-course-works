@@ -1,0 +1,272 @@
+import json
+import os
+from typing import Dict, List, Optional
+from datetime import datetime
+from enum import Enum
+
+class CaseStatus(Enum):
+    """Enum for valid case statuses"""
+    OPEN = "Open"
+    UNDER_INVESTIGATION = "Under Investigation"
+    CLOSED = "Closed"
+
+class Case:
+    """Class representing a single crime case"""
+    def __init__(self, case_id: str, title: str, status: CaseStatus, suspects: List[str] = None):
+        self.case_id = case_id
+        self.title = title
+        self._status = status
+        self.suspects = suspects or []
+        self.created_date = datetime.now().isoformat()
+        self.last_modified = self.created_date
+
+    @property
+    def status(self) -> CaseStatus:
+        return self._status
+
+    @status.setter
+    def status(self, new_status: CaseStatus):
+        self._status = new_status
+        self.last_modified = datetime.now().isoformat()
+
+    def add_suspect(self, suspect: str) -> bool:
+        """Add a suspect to the case if not already present"""
+        if suspect not in self.suspects:
+            self.suspects.append(suspect)
+            self.last_modified = datetime.now().isoformat()
+            return True
+        return False
+
+    def remove_suspect(self, suspect: str) -> bool:
+        """Remove a suspect from the case"""
+        if suspect in self.suspects:
+            self.suspects.remove(suspect)
+            self.last_modified = datetime.now().isoformat()
+            return True
+        return False
+
+    def to_dict(self) -> Dict:
+        """Convert case to dictionary for JSON serialization"""
+        return {
+            "case_id": self.case_id,
+            "title": self.title,
+            "status": self.status.value,
+            "suspects": self.suspects,
+            "created_date": self.created_date,
+            "last_modified": self.last_modified
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict) -> 'Case':
+        """Create a Case instance from dictionary data"""
+        case = cls(
+            case_id=data["case_id"],
+            title=data["title"],
+            status=CaseStatus(data["status"]),
+            suspects=data["suspects"]
+        )
+        case.created_date = data.get("created_date", datetime.now().isoformat())
+        case.last_modified = data.get("last_modified", case.created_date)
+        return case
+
+class CaseManager:
+    """Class managing all case operations and file handling"""
+    def __init__(self, filename: str = "cases.json"):
+        self.filename = filename
+        self.cases: Dict[str, Case] = {}
+        self.load_cases()
+
+    def load_cases(self) -> None:
+        """Load cases from JSON file"""
+        if not os.path.exists(self.filename):
+            return
+        
+        try:
+            with open(self.filename, 'r') as file:
+                data = json.load(file)
+                self.cases = {
+                    case_id: Case.from_dict({**case_data, "case_id": case_id})
+                    for case_id, case_data in data.items()
+                }
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Error reading case file: {e}")
+
+    def save_cases(self) -> None:
+        """Save cases to JSON file"""
+        data = {
+            case.case_id: {
+                k: v for k, v in case.to_dict().items() if k != "case_id"
+            }
+            for case in self.cases.values()
+        }
+        with open(self.filename, 'w') as file:
+            json.dump(data, file, indent=4)
+
+    def add_case(self, case: Case) -> bool:
+        """Add a new case to the system"""
+        if case.case_id in self.cases:
+            return False
+        self.cases[case.case_id] = case
+        self.save_cases()
+        return True
+
+    def get_case(self, case_id: str) -> Optional[Case]:
+        """Retrieve a case by ID"""
+        return self.cases.get(case_id)
+
+    def update_case_status(self, case_id: str, new_status: CaseStatus) -> bool:
+        """Update the status of a case"""
+        case = self.get_case(case_id)
+        if case:
+            case.status = new_status
+            self.save_cases()
+            return True
+        return False
+
+    def delete_case(self, case_id: str) -> bool:
+        """Delete a case from the system"""
+        if case_id in self.cases:
+            del self.cases[case_id]
+            self.save_cases()
+            return True
+        return False
+
+    def find_cases_by_suspect(self, suspect: str) -> List[Case]:
+        """Find all cases involving a specific suspect"""
+        return [case for case in self.cases.values() if suspect in case.suspects]
+
+    def get_open_cases(self) -> List[Case]:
+        """Get all cases with 'Open' status"""
+        return [case for case in self.cases.values() if case.status == CaseStatus.OPEN]
+
+class UserInterface:
+    """Class handling user interaction"""
+    def __init__(self, case_manager: CaseManager):
+        self.case_manager = case_manager
+
+    def display_case(self, case: Case) -> None:
+        """Display a single case"""
+        print(f"\nCase ID: {case.case_id}")
+        print(f"Title: {case.title}")
+        print(f"Status: {case.status.value}")
+        print(f"Suspects: {', '.join(case.suspects) if case.suspects else 'None'}")
+        print(f"Created: {case.created_date}")
+        print(f"Last Modified: {case.last_modified}")
+        print("-" * 40)
+
+    def get_valid_status(self) -> CaseStatus:
+        """Get a valid status from user input"""
+        while True:
+            print("\nValid statuses:")
+            for status in CaseStatus:
+                print(f"- {status.value}")
+            status = input("Enter status: ").strip()
+            try:
+                return CaseStatus(status)
+            except ValueError:
+                print("Invalid status! Please try again.")
+
+    def add_new_case(self) -> None:
+        """Handle adding a new case"""
+        case_id = input("Enter Case ID (e.g., C104): ").strip()
+        if self.case_manager.get_case(case_id):
+            print("Case ID already exists!")
+            return
+
+        title = input("Enter case title: ").strip()
+        suspects = [s.strip() for s in input("Enter suspects (comma-separated, or press Enter if none): ").split(',') if s.strip()]
+        status = self.get_valid_status()
+
+        case = Case(case_id, title, status, suspects)
+        if self.case_manager.add_case(case):
+            print(f"Case {case_id} added successfully!")
+        else:
+            print("Failed to add case.")
+
+    def run(self) -> None:
+        """Run the main program loop"""
+        while True:
+            print("\nCrime Case Management System")
+            print("1. View all cases")
+            print("2. Add a new case")
+            print("3. Update case status")
+            print("4. Add suspects to a case")
+            print("5. Search open cases")
+            print("6. Delete a case")
+            print("7. Find cases by suspect")
+            print("8. Exit")
+
+            choice = input("\nEnter your choice (1-8): ").strip()
+
+            try:
+                if choice == "1":
+                    for case in self.case_manager.cases.values():
+                        self.display_case(case)
+                
+                elif choice == "2":
+                    self.add_new_case()
+                
+                elif choice == "3":
+                    case_id = input("Enter Case ID: ").strip()
+                    new_status = self.get_valid_status()
+                    if self.case_manager.update_case_status(case_id, new_status):
+                        print("Status updated successfully!")
+                    else:
+                        print("Case not found!")
+                
+                elif choice == "4":
+                    case_id = input("Enter Case ID: ").strip()
+                    case = self.case_manager.get_case(case_id)
+                    if case:
+                        suspects = input("Enter suspects to add (comma-separated): ").split(',')
+                        for suspect in suspects:
+                            suspect = suspect.strip()
+                            if suspect and case.add_suspect(suspect):
+                                print(f"Added {suspect} to case {case_id}")
+                        self.case_manager.save_cases()
+                    else:
+                        print("Case not found!")
+                
+                elif choice == "5":
+                    open_cases = self.case_manager.get_open_cases()
+                    if open_cases:
+                        for case in open_cases:
+                            self.display_case(case)
+                    else:
+                        print("No open cases found.")
+                
+                elif choice == "6":
+                    case_id = input("Enter Case ID to delete: ").strip()
+                    if self.case_manager.delete_case(case_id):
+                        print(f"Case {case_id} deleted successfully!")
+                    else:
+                        print("Case not found!")
+                
+                elif choice == "7":
+                    suspect = input("Enter suspect name: ").strip()
+                    cases = self.case_manager.find_cases_by_suspect(suspect)
+                    if cases:
+                        print(f"\nCases involving {suspect}:")
+                        for case in cases:
+                            self.display_case(case)
+                    else:
+                        print(f"No cases found involving {suspect}")
+                
+                elif choice == "8":
+                    print("Thank you for using the Crime Case Management System!")
+                    break
+                
+                else:
+                    print("Invalid choice! Please try again.")
+
+            except Exception as e:
+                print(f"An error occurred: {str(e)}")
+                print("Please try again.")
+
+def main():
+    case_manager = CaseManager()
+    ui = UserInterface(case_manager)
+    ui.run()
+
+if __name__ == "__main__":
+    main()

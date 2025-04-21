@@ -1,0 +1,5 @@
+
+Me1 World by write() function.
+Hello World by write() function.2
+Hello World by write() function.3
+Me1
