@@ -8,6 +8,7 @@ with open("vocabs.json", "r") as file:
 # v = json.dumps(vocabs, indent=2)
 # print(v)
 
+
 # Display all the words in vocabulary
 def all_words():
     print("\t--- ALL WORDS ---")
@@ -16,6 +17,7 @@ def all_words():
         print(f"Meaning: {details["Meaning"]}")
         print(f"Example: {details["Example"]}")
     print(FORMAT_DASHES)
+
 
 # Add new word to vocabs with user prompt (Check duplicate)
 def add_word():
@@ -60,6 +62,7 @@ def search_word():
     if not word_found:
         print(f"Word '{query_word}' not found.")
 
+
 # Update existing word details by user prompt
 def update_word():
     print("\t--- Search Word ---")
@@ -93,7 +96,29 @@ def update_word():
 
 # Delete a existing word
 def delete_word():
-    pass
+    print("\t--- Delete Word ---")
+    query_word = input("Enter word you want to delete: ").strip().lower().replace(" ", "")
+    query_word_found = False
+
+    for word in list(vocabs):
+        normalized_word = word.lower().replace(" ", "")
+
+        if query_word == normalized_word:
+            is_confirm = input("Are you sure you want to delete? (yes/no)").strip() 
+            if is_confirm.lower() == 'yes':
+                del vocabs[word] # Deleted Word
+                print(f"Word {query_word.title()} has been deleted successfully!")
+            else:
+                print(f"Deletion of '{query_word.title()}' was unsuccessful.")
+            query_word_found = True
+            break
+    
+    if not query_word_found:
+            print(f"Word '{query_word.title()}' Not Found.")
+    # save to json
+    with open('vocabs.json', 'w') as file:
+        json.dump(vocabs, file, indent=4)
+    print("JSON Was Updated After Deletion Process.")
 
 
 # Quiz mode for users(Shuffle and randomness: Check requirement: test2.dox)
@@ -103,11 +128,25 @@ def quiz_mode():
 
 # Export all word to text file (Vocabs.txt)
 def export_words():
-    pass
+    try:
+        with open("vocabs.txt", "w") as text:
+            for word, details in vocabs.items():
+                text.write(f"Word: {word}\n")
+                text.write(f"Meaning: {details.get('Meaning', 'NULL')}\n")
+                text.write(f"Example: {details.get('Example', 'NULL')}\n")
+                text.write("\n")
+        print("Vocabulary has been succesfully exported to vocabs.txt file.")
+
+    except FileNotFoundError:
+        print("'Vocabs.json' file not found!")
+    except Exception as e:
+        print(f"Encountered Unexpected Error {e}")
 
 
 # Driver
 # all_words()
 # add_word()
 # search_word()
-update_word()
+# update_word()
+# delete_word()
+export_words()

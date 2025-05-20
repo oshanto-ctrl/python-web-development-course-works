@@ -1,0 +1,12 @@
+Word: Python
+Meaning: A programming language
+Example: Python is used for web development.
+
+Word: Algorithm
+Meaning: A step-by-step procedure to solve a problem
+Example: Sorting algorithms are essential in computer science.
+
+Word: Data Structure
+Meaning: Specialized format for organizng, processing, retrieving and storing data
+Example: Customer's name can be represented as data structure with spearate fields for first, middle, last name
+
