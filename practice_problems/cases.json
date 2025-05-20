@@ -16,7 +16,10 @@
     },
     "C103": {
         "Title": "Hit and Run",
-        "Suspects": [],
+        "Suspects": [
+            "Erling Haland",
+            "Suarez"
+        ],
         "Status": "Open"
     },
     "C104": {
@@ -29,6 +32,6 @@
     "C105": {
         "Title": "Attempt To Murder",
         "Suspects": [],
-        "Status": "Open"
+        "Status": "Closed"
     }
 }
