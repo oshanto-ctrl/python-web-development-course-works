@@ -19,7 +19,24 @@ def all_words():
 
 # Add new word to vocabs with user prompt (Check duplicate)
 def add_word():
-    pass
+    # Prompt: Word, Meaning, Example
+    new_word = input("Add a new word: ").strip()
+    new_meaning = input("Add a new meaning of word: ").strip()
+    new_example = input("Add a new example of word: ").strip()
+
+    if new_word not in vocabs:
+        vocabs[new_word] = {
+            "Meaning": new_meaning,
+            "Example": new_example,
+        }
+    else:
+        print(f"Word '{new_word}' already exists!")
+        exit()
+    # Add to vocabs.json
+    with open("vocabs.json", 'w') as file:
+        json.dump(vocabs, file, indent=4)
+    
+    print(f"\nNew word '{new_word}' was successfully added to vocabulary.")
 
 
 # Search a word with user input
@@ -48,4 +65,5 @@ def export_words():
 
 
 # Driver
-all_words()
+# all_words()
+add_word()
