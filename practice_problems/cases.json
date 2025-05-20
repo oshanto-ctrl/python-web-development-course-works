@@ -33,5 +33,12 @@
         "Title": "Attempt To Murder",
         "Suspects": [],
         "Status": "Closed"
+    },
+    "C106": {
+        "Title": "Harrashment",
+        "Suspects": [
+            "Laporta"
+        ],
+        "Status": "Close"
     }
 }
