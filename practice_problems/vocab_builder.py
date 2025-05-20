@@ -1,4 +1,6 @@
 import json
+import random
+
 FORMAT_DASHES = "-" * 50
 with open("vocabs.json", "r") as file:
     vocabs = json.load(file)
@@ -123,7 +125,30 @@ def delete_word():
 
 # Quiz mode for users(Shuffle and randomness: Check requirement: test2.dox)
 def quiz_mode():
-    pass
+    try:
+        # Try to pick a random word
+        word, details = random.choice(list(vocabs.items()))
+        # print(word, '\n', details)
+        correct_answer = word.strip().lower().replace(" ", "")
+
+        # Prompt user, meaning of word:
+        print("\nGuess the Word!")
+        print(f"Meaning: {details.get('Meaning', 'No Meaning Available')}\n")
+
+        # User input
+        user_guess = input("Your guessed word: ").strip().lower().replace(" ", "")
+
+        if user_guess == correct_answer:
+            print(f"Excellent! Your Scored 1/1\n")
+        else:
+            print(f"Incorrect. The correct word was {correct_answer}")
+            print("Score: 0/1\n")
+
+    except FileNotFoundError:
+        print("Error Encountered 'Vocabs.json' file not found!")
+    
+    except Exception as e:
+        print(f"Unexpected error: {e}")
 
 
 # Export all word to text file (Vocabs.txt)
@@ -150,38 +175,38 @@ def export_words():
 # update_word()
 # delete_word()
 # export_words()
-# quiz()
+quiz_mode()
 
-while True:
-    print(f"\n--- Vocabulary ---")
-    print(f"1. View All Words")
-    print(f"2. Add a new word")
-    print(f"3. Search for a word")
-    print(f"4. Update word details")
-    print(f"5. Delete a word")
-    print(f"6. Quiz Mode")
-    print(f"7. Export to text file")
-    print(f"8. Exit")
+# while True:
+#     print(f"\n--- Vocabulary ---")
+#     print(f"1. View All Words")
+#     print(f"2. Add a new word")
+#     print(f"3. Search for a word")
+#     print(f"4. Update word details")
+#     print(f"5. Delete a word")
+#     print(f"6. Quiz Mode")
+#     print(f"7. Export to text file")
+#     print(f"8. Exit")
 
-     choice = input("Choose and option (1-8): ").strip()
+#     choice = input("Choose and option (1-8): ").strip()
 
-    match choice:
-        case "1":
-            all_words()
-        case "2":
-            add_word()
-        case "3":
-            search_word()
-        case "4":
-            update_word()
-        case "5":
-            delete_word()
-        case "6":
-            quiz_mode()
-        case "7":
-            export_words()
-        case "8":
-            print("Exiting program...")
-            break
-        case _:
-            print("Invalid choice. Please select 1-8.")
+#     match choice:
+#         case "1":
+#             all_words()
+#         case "2":
+#             add_word()
+#         case "3":
+#             search_word()
+#         case "4":
+#             update_word()
+#         case "5":
+#             delete_word()
+#         case "6":
+#             quiz_mode()
+#         case "7":
+#             export_words()
+#         case "8":
+#             print("Exiting program...")
+#             break
+#         case _:
+#             print("Invalid choice. Please select 1-8.")
