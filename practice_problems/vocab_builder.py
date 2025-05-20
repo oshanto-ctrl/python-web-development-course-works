@@ -149,4 +149,39 @@ def export_words():
 # search_word()
 # update_word()
 # delete_word()
-export_words()
+# export_words()
+# quiz()
+
+while True:
+    print(f"\n--- Vocabulary ---")
+    print(f"1. View All Words")
+    print(f"2. Add a new word")
+    print(f"3. Search for a word")
+    print(f"4. Update word details")
+    print(f"5. Delete a word")
+    print(f"6. Quiz Mode")
+    print(f"7. Export to text file")
+    print(f"8. Exit")
+
+     choice = input("Choose and option (1-8): ").strip()
+
+    match choice:
+        case "1":
+            all_words()
+        case "2":
+            add_word()
+        case "3":
+            search_word()
+        case "4":
+            update_word()
+        case "5":
+            delete_word()
+        case "6":
+            quiz_mode()
+        case "7":
+            export_words()
+        case "8":
+            print("Exiting program...")
+            break
+        case _:
+            print("Invalid choice. Please select 1-8.")
