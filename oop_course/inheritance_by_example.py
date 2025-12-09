@@ -95,3 +95,29 @@ class SMSNotification(Notification):
     def send(self): return 'SMS Sent'
 
 print(f"\n{EmailNotification().send()}\n{SMSNotification().send()}")
+
+
+# Hybrid Inheritance
+# Combination of two or more type (Often Multi-level + multiple)
+# Manager inherits Employee (single) but also includes 
+# TeamLeadMixin and BudgetOwnerMixin (multiple)
+
+# class Employee:
+#     def base_info(self): return 'Base Employee'
+
+# class TeamLeadMixin:
+#     def lead(self): return 'Leading Teams'
+
+# class BudgetOwnerMixin:
+#     def allocate(self): return 'Allocating Budget'
+
+
+# # Hybrid for manager class: Manager has single + Mixins
+# class Manager(Employee, TeamLeadMixin, BudgetOwnerMixin):
+#     pass
+
+# m = Manager()
+# print(m.base_info()) # Base Employee
+# print(m.lead()) # Leading Teams
+# print(m.allocate()) # Allocating Budgets
+

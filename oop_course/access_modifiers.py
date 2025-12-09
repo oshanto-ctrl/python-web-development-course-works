@@ -135,3 +135,41 @@ print(u._login_attempts)        # Discouraged, but OK
 # This works? Mangle Names. This is to avoid accidental overriding in subclases.
 # print(u._UserAuth__password) 
 
+# Private Name Mangling
+# obj._ClassName__variable
+class A:
+    def __init__(self):
+        self.__x = 10 # private
+
+# obj
+a = A()
+print(a._A__x) # type: ignore # This will print __x = 10
+# print(a.__x) # This won't print -> AttributeError: 'A' obj has no attr. __x
+
+small_task = '''
+Small Interview Task (with solution)
+Task:
+Create a SecureNote class:
+private __content
+protected _last_accessed
+public read() method
+update _last_accessed whenever read
+'''
+from datetime import datetime
+
+class SecureNote:
+    def __init__(self, content):
+        self.__content = content #   private
+        self._last_accessed = None    #   protected
+    
+    def read(self):
+        self._last_accessed = datetime.now()
+        return self.__content
+    
+# obj
+note = SecureNote('Message on self-descruct 1 min after opening!')
+print(note.read())      #   shows the secure note content
+print(note._last_accessed)      # Allowed but discouraged to use.
+
+
+
