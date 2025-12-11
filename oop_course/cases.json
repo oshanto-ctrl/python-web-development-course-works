@@ -1,0 +1,51 @@
+{
+    "C101": {
+        "Title": "Bank Robbery",
+        "Suspects": [
+            "John Doe",
+            "Jane Smith"
+        ],
+        "Status": "Open"
+    },
+    "C102": {
+        "Title": "Hacking Incident",
+        "Suspects": [
+            "Alice Brown"
+        ],
+        "Status": "Closed"
+    },
+    "C103": {
+        "Title": "Hit and Run",
+        "Suspects": [
+            "Erling Haland",
+            "Suarez"
+        ],
+        "Status": "Open"
+    },
+    "C104": {
+        "Title": "Fraud",
+        "Suspects": [
+            "Messi"
+        ],
+        "Status": "Open"
+    },
+    "C105": {
+        "Title": "Attempt To Murder",
+        "Suspects": [],
+        "Status": "Closed"
+    },
+    "C106": {
+        "Title": "Harrashment",
+        "Suspects": [
+            "Laporta"
+        ],
+        "Status": "Close"
+    },
+    "C107": {
+        "Title": "Check Fraud",
+        "Suspects": [
+            "Barry Allen"
+        ],
+        "Status": "Open"
+    }
+}
