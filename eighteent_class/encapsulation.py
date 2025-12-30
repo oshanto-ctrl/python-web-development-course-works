@@ -90,7 +90,35 @@ p1.display_paitent_info()
 
 
 
+# ATM (Basic features)
 
+class ATM:
+    def __init__(self, account_number, pin, balance="2000"):
+        self.account_number = account_number
+        self.__pin = pin
+        self.__balance = balance
+    
+    # Get balance method
+    def get_balance(self, entered_pin):
+        if entered_pin == self.__pin:
+            return self.__balance
+        return "Invalid PIN. Try Again."
+
+    # Deposit money
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            return "Deposit Successful."
+        return "Invalid Amount. Trye Again."
+    
+    # Withdraw money
+    def withdraw(self, amount, entered_pin):
+        if entered_pin != self.__pin:
+            return "Invalid PIN."
+        if amount > self.__balance:
+            return "Insufficient funds"
+        self.__balance -= amount
+        return "Withdrawl successful."
 
 
 
