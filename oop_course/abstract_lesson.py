@@ -37,3 +37,24 @@ c = Car()
 c.start()
 c.jump()
 c.end()
+
+
+# Example
+class PaymentGateway(ABC):
+    @abstractmethod
+    def pay(self, amount):
+        pass
+
+class Bkash(PaymentGateway):
+    def pay(self, amount): 
+        return f"paid {amount} taka via bkash."
+
+class CreditCard(PaymentGateway):
+    def pay(self, amount):
+        return f"paid {amount} taka via credit card."
+
+def process_payment(gateway: PaymentGateway, amount):
+    print(gateway.pay(amount))
+
+process_payment(Bkash(), 1000)
+process_payment(CreditCard(), 2000)
