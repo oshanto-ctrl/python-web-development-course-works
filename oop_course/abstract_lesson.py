@@ -43,14 +43,14 @@ c.end()
 class PaymentGateway(ABC):
     @abstractmethod
     def pay(self, amount):
-        pass
+        return None
 
 class Bkash(PaymentGateway):
-    def pay(self, amount): 
+    def pay(self, amount):  # type: ignore
         return f"paid {amount} taka via bkash."
 
 class CreditCard(PaymentGateway):
-    def pay(self, amount):
+    def pay(self, amount): # pyright: ignore[reportIncompatibleMethodOverride]
         return f"paid {amount} taka via credit card."
 
 def process_payment(gateway: PaymentGateway, amount):
