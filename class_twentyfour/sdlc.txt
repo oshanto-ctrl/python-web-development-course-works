@@ -1,0 +1,31 @@
+Software Development Life-Cycle
+6 Steps
+1) Planning
+2) Analysis
+3) Design
+4) Implementation
+5) Testing & Integration
+6) Maintainance
+
+Feasibility:
+1) Is software economical
+2) Is the software legal
+3) Operational? Meets clients' goal
+4) Technical: How to build it
+5) Schedule: Time to deliver
+
+SRS - Software Requirement Specification
+- Data analyst makes them
+
+SDLC MODEL
+
+# 1. Waterfall model
+# 2. Iterative model
+# 3. Agile model
+# 4. V-model
+# 5. Spiral model
+# 6. Incremental model
+# 7. Rapid Application Development (RAD) model
+
+
+
